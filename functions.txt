@@ -1,0 +1,16 @@
+D4:D10
+  IF(
+    ISNUMBER(C5),
+    "",
+    IF(
+      C3="Pages Read",
+      CEILING(($C$2-SUM($C$4:$C$10))/E4),
+      IF(
+        ISNUMBER(C3),
+        CEILING(($C$2-SUM($C$4:$C$10))/E4),
+        D3
+      )
+    )
+  )
+
+= IF(ISNUMBER(C5),"",IF(C3="Pages Read",CEILING(($C$2-SUM($C$4:$C$10))/E4),IF(ISNUMBER(C3),CEILING(($C$2-SUM($C$4:$C$10))/E4),D3)))
