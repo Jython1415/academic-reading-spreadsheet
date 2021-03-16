@@ -1,16 +1,25 @@
 D4:D10
+  if this is a previous day:
+    print ""
+  else if this is a current day:
+    print cell-below
+  else if this is tomorrow:
+    print reading-target
+  else if this is a future day:
+    print cell-above
+
   IF(
     ISNUMBER(C5),
     "",
     IF(
-      C3="Pages Read",
-      CEILING(($C$2-SUM($C$4:$C$10))/E4),
+      AND(NOT(ISNUMBER(C5)),ISNUMBER(C4)),
+      D5,
       IF(
-        ISNUMBER(C3),
-        CEILING(($C$2-SUM($C$4:$C$10))/E4),
-        D3
-      )
-    )
-  )
+        AND(ISNUMBER(C3),NOT(ISNUMBER(C4))),
+        CEILING(($C$2-(SUM($C$4:$C$10)-C4))/E4),
+        IF(
+          NOT(D3="Target Reading"),
+          D3,
+          CEILING($C$2/7)))))
 
-= IF(ISNUMBER(C5),"",IF(C3="Pages Read",CEILING(($C$2-SUM($C$4:$C$10))/E4),IF(ISNUMBER(C3),CEILING(($C$2-SUM($C$4:$C$10))/E4),D3)))
+IF(ISNUMBER(C5),"",IF(AND(NOT(ISNUMBER(C5)),ISNUMBER(C4)),D5,IF(AND(ISNUMBER(C3),NOT(ISNUMBER(C4))),CEILING(($C$2-(SUM($C$4:$C$10)-C4))/E4),IF(NOT(D3="Target Reading"),D3,CEILING($C$2/7)))))
